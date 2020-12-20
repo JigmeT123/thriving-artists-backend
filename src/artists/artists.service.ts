@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ArtistsRepository } from './artists.repository';
 import { ArtistsEntity } from './artists.entity';
@@ -17,5 +17,16 @@ export class ArtistsService {
 
     createArtists(createArtists: CreateArtistDto): Promise<ArtistsEntity>{
         return this.artistRepo.createArtists(createArtists);
+    }
+
+    async getArtistsById(id:number):Promise<ArtistsEntity>{
+        const artist = await this.artistRepo.findOne(id);
+        if(!artist){
+            throw new NotFoundException(`artists with id ${id} is not found`);
+        }
+        return artist;
+    }
+    updateArtistSold(id:number):Promise<ArtistsEntity>{
+        return this.artistRepo.updateArtistSold(id);
     }
 }

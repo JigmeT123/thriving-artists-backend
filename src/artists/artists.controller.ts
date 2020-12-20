@@ -1,4 +1,4 @@
-import { Controller, Get, Post, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Controller, Get, Post, UsePipes, ValidationPipe, Body, Param, ParseIntPipe, Patch } from '@nestjs/common';
 import {ArtistsService} from './artists.service';
 import { ArtistsEntity } from './artists.entity';
 import { CreateArtistDto } from './dto/create-artist.dto';
@@ -16,8 +16,18 @@ export class ArtistsController {
 
     @Post()
     @UsePipes(new ValidationPipe({ transformOptions: { enableImplicitConversion: true } }))
-    createArtists(createDto: CreateArtistDto):Promise<ArtistsEntity>{
+    createArtists( @Body() createDto: CreateArtistDto):Promise<ArtistsEntity>{
         return this.artistService.createArtists(createDto);
     }
-    
+
+    @Get(':id')
+    getArtistById(@Param('id',ParseIntPipe) id:number):Promise<ArtistsEntity>{
+        return this.artistService.getArtistsById(id);
+    }    
+
+    @Patch(':id')
+    updateArtistSold(@Param('id', ParseIntPipe) id:number):Promise<ArtistsEntity>{
+        return this.artistService.updateArtistSold(id)
+    }
+
 }
