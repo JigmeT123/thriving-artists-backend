@@ -4,6 +4,9 @@ import { typeOrmConfig } from './config/typeorm.config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
-  imports: [ArtistsModule, TypeOrmModule.forRoot(typeOrmConfig)],
+  imports: [
+    ArtistsModule,
+    TypeOrmModule.forRoot(typeOrmConfig),
+  ],
 })
 export class AppModule {}
