@@ -1,4 +1,4 @@
-import {IsNotEmpty, IsOptional, IsBoolean, IsInt, IsIn} from 'class-validator'
+import {IsNotEmpty, IsOptional, IsBoolean, IsInt} from 'class-validator'
 export class CreateArtistDto{
     @IsNotEmpty()
     artistName: string;
