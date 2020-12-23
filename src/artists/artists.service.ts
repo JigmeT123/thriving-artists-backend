@@ -29,4 +29,6 @@ export class ArtistsService {
     updateArtistSold(id:number):Promise<ArtistsEntity>{
         return this.artistRepo.updateArtistSold(id);
     }
+
+
 }
