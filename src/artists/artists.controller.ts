@@ -1,8 +1,24 @@
-import { Controller, Get, Post, UsePipes, ValidationPipe, Body, Param, ParseIntPipe, Patch} from '@nestjs/common';
+import { Controller, Get, Post, UsePipes, ValidationPipe, Body, Param, ParseIntPipe, Patch, UseInterceptors, UploadedFiles} from '@nestjs/common';
 import {ArtistsService} from './artists.service';
 import { ArtistsEntity } from './artists.entity';
 import { CreateArtistDto } from './dto/create-artist.dto';
+import { FilesInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
+import {v4} from 'uuid';
+import path = require('path');
 
+export const storage = {
+    storage: diskStorage({
+        destination: './uploads/artImage',
+        filename: (req, file, cb) => {
+            const filename: string = path.parse(file.originalname).name.replace(/\s/g, '') + v4();
+            const extension: string = path.parse(file.originalname).ext;
+
+            cb(null, `${filename}${extension}`)
+        }
+    })
+
+}
 
 @Controller('artists')
 export class ArtistsController {
@@ -16,9 +32,11 @@ export class ArtistsController {
     }
 
     @Post()
+    @UseInterceptors(FilesInterceptor('art[]',5,storage))
     @UsePipes(new ValidationPipe({ transformOptions: { enableImplicitConversion: true } }))
-    createArtists( @Body() createDto: CreateArtistDto):Promise<ArtistsEntity>{
-        return this.artistService.createArtists(createDto);
+    createArtists(@UploadedFiles() file, @Body() createDto: CreateArtistDto){
+        console.log(file);
+        return this.artistService.createArtists(createDto, file);
     }
 
     @Get(':id')

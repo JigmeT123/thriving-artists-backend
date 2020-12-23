@@ -3,7 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { ArtistsRepository } from './artists.repository';
 import { ArtistsEntity } from './artists.entity';
 import { CreateArtistDto } from './dto/create-artist.dto';
-
 @Injectable()
 export class ArtistsService {
     constructor(
@@ -15,8 +14,8 @@ export class ArtistsService {
         return this.artistRepo.getArtists()
     }
 
-    createArtists(createArtists: CreateArtistDto): Promise<ArtistsEntity>{
-        return this.artistRepo.createArtists(createArtists);
+    createArtists(createArtists: CreateArtistDto, file): Promise<ArtistsEntity>{
+        return this.artistRepo.createArtists(createArtists, file);
     }
 
     async getArtistsById(id:number):Promise<ArtistsEntity>{
@@ -29,6 +28,5 @@ export class ArtistsService {
     updateArtistSold(id:number):Promise<ArtistsEntity>{
         return this.artistRepo.updateArtistSold(id);
     }
-
 
 }

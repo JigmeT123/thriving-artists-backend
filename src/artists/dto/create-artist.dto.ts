@@ -1,4 +1,4 @@
-import {IsNotEmpty, IsOptional, IsBoolean, IsInt, IsString} from 'class-validator'
+import {IsNotEmpty, IsOptional, IsBoolean, IsInt} from 'class-validator'
 export class CreateArtistDto{
     @IsNotEmpty()
     artistName: string;
@@ -59,7 +59,4 @@ export class CreateArtistDto{
 	@IsBoolean()
     sold:boolean;
 
-    @IsNotEmpty()
-    @IsString()
-    extension:string;
 }

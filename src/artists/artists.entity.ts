@@ -1,5 +1,5 @@
 import {BaseEntity, PrimaryGeneratedColumn, Column, Entity} from 'typeorm';
-import { IsString, IsNotEmpty } from 'class-validator';
+import { IsArray } from 'class-validator';
 
 @Entity()
 export class ArtistsEntity extends BaseEntity{
@@ -35,12 +35,14 @@ export class ArtistsEntity extends BaseEntity{
     @Column()
     art2Price:number;
 
+
     @Column()
     art3Name:string;
     @Column()
     artDec3:string;
     @Column()
     art3Price:number;
+
 
     @Column()
     art4Name:string;
@@ -49,6 +51,7 @@ export class ArtistsEntity extends BaseEntity{
     @Column()
     art4Price:number;
 
+
     @Column()
     art5Name:string;
     @Column()
@@ -56,11 +59,12 @@ export class ArtistsEntity extends BaseEntity{
     @Column()
     art5Price:number;
 
+
     @Column()
     sold:boolean;
 
     @Column()
-    @IsNotEmpty()
-    @IsString()
-    extension: string;
+    @IsArray()
+    artPic:Array<string>;
+
 }

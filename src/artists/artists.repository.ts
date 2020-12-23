@@ -6,8 +6,8 @@ import { NotFoundException } from '@nestjs/common';
 @EntityRepository(ArtistsEntity)
 export class ArtistsRepository extends Repository<ArtistsEntity> {
 
-    async createArtists(createArtists: CreateArtistDto): Promise<ArtistsEntity>{
-        const {artistName, artistInsta, artistWp, artistEmail, artistBio, art1Name,artDec1,art1Price,art2Name,artDec2,art2Price,art3Name,artDec3,art3Price,art4Name,artDec4,art4Price,art5Name,artDec5,art5Price,sold, extension} = createArtists;
+    async createArtists(createArtists: CreateArtistDto, file): Promise<ArtistsEntity>{
+        const {artistName, artistInsta, artistWp, artistEmail, artistBio, art1Name,artDec1,art1Price,art2Name,artDec2,art2Price,art3Name,artDec3,art3Price,art4Name,artDec4,art4Price,art5Name,artDec5,art5Price,sold} = createArtists;
         const artists = new ArtistsEntity();
         artists.artistInsta = artistInsta || "";
         artists.artistName = artistName;
@@ -29,9 +29,9 @@ export class ArtistsRepository extends Repository<ArtistsEntity> {
         artists.art5Name = art5Name || "";
         artists.artDec5 = artDec5 || "";
         artists.art5Price = art5Price || 0;
-        artists.extension = extension;
         artists.sold = sold;
-        await artists.save()
+        artists.artPic = file;
+        await artists.save();
         return artists;
 
     }
