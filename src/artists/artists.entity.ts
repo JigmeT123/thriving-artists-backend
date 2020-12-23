@@ -1,6 +1,4 @@
 import {BaseEntity, PrimaryGeneratedColumn, Column, Entity} from 'typeorm';
-import { IsArray } from 'class-validator';
-
 @Entity()
 export class ArtistsEntity extends BaseEntity{
     @PrimaryGeneratedColumn()
@@ -63,8 +61,15 @@ export class ArtistsEntity extends BaseEntity{
     @Column()
     sold:boolean;
 
-    @Column("text", { array: true })
-    @IsArray()
-    artPic:Array<string>;
+    @Column()
+    artPic1: string;
+    @Column()
+    artPic2: string;
+    @Column()
+    artPic3: string;
+    @Column()
+    artPic4: string;
+    @Column()
+    artPic5: string;
 
 }

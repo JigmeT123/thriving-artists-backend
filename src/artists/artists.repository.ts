@@ -30,7 +30,11 @@ export class ArtistsRepository extends Repository<ArtistsEntity> {
         artists.artDec5 = artDec5 || "";
         artists.art5Price = art5Price || 0;
         artists.sold = sold;
-        artists.artPic = file;
+        artists.artPic1 = file[0] || "There is no data";
+        artists.artPic2 = file[1] || "There is no data";
+        artists.artPic3 = file[2] || "There is no data";
+        artists.artPic4 = file[3] || "There is no data";
+        artists.artPic5 = file[4] || "There is no data";
         await artists.save();
         return artists;
     }
