@@ -56,8 +56,6 @@ export class ArtistsEntity extends BaseEntity{
     artDec5:string;
     @Column()
     art5Price:number;
-
-
     @Column()
     sold:boolean;
 
