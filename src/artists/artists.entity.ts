@@ -63,7 +63,7 @@ export class ArtistsEntity extends BaseEntity{
     @Column()
     sold:boolean;
 
-    @Column()
+    @Column("text", { array: true })
     @IsArray()
     artPic:Array<string>;
 

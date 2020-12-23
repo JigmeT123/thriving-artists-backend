@@ -35,7 +35,6 @@ export class ArtistsController {
     @UseInterceptors(FilesInterceptor('art[]',5,storage))
     @UsePipes(new ValidationPipe({ transformOptions: { enableImplicitConversion: true } }))
     createArtists(@UploadedFiles() file, @Body() createDto: CreateArtistDto){
-        console.log(file);
         return this.artistService.createArtists(createDto, file);
     }
 

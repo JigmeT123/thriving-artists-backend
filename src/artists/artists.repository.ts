@@ -33,7 +33,6 @@ export class ArtistsRepository extends Repository<ArtistsEntity> {
         artists.artPic = file;
         await artists.save();
         return artists;
-
     }
 
     async updateArtistSold(id:number):Promise <ArtistsEntity>{
@@ -41,7 +40,6 @@ export class ArtistsRepository extends Repository<ArtistsEntity> {
         if(!artist){
             throw new NotFoundException(`The artist with id ${id} is not found`);
         }
-
         artist.sold = true;
         await artist.save()
         return artist;
