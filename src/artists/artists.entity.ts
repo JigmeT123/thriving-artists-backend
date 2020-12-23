@@ -61,15 +61,15 @@ export class ArtistsEntity extends BaseEntity{
     @Column()
     sold:boolean;
 
-    @Column()
+    @Column({type: "json"})
     artPic1: string;
-    @Column()
+    @Column({type: "json"})
     artPic2: string;
-    @Column()
+    @Column({type: "json"})
     artPic3: string;
-    @Column()
+    @Column({type: "json"})
     artPic4: string;
-    @Column()
+    @Column({type: "json"})
     artPic5: string;
 
 }
