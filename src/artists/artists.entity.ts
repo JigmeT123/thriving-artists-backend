@@ -1,4 +1,5 @@
 import {BaseEntity, PrimaryGeneratedColumn, Column, Entity} from 'typeorm';
+import { IsString, IsEmpty } from 'class-validator';
 
 @Entity()
 export class ArtistsEntity extends BaseEntity{
@@ -57,4 +58,9 @@ export class ArtistsEntity extends BaseEntity{
 
     @Column()
     sold:boolean;
+
+    @Column()
+    @IsString()
+    @IsEmpty()
+    extension: string;
 }

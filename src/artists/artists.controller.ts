@@ -1,7 +1,8 @@
-import { Controller, Get, Post, UsePipes, ValidationPipe, Body, Param, ParseIntPipe, Patch } from '@nestjs/common';
+import { Controller, Get, Post, UsePipes, ValidationPipe, Body, Param, ParseIntPipe, Patch, UseInterceptors, UploadedFile} from '@nestjs/common';
 import {ArtistsService} from './artists.service';
 import { ArtistsEntity } from './artists.entity';
 import { CreateArtistDto } from './dto/create-artist.dto';
+import {FileInterceptor} from '@nestjs/platform-express';
 
 @Controller('artists')
 export class ArtistsController {
@@ -28,6 +29,12 @@ export class ArtistsController {
     @Patch(':id')
     updateArtistSold(@Param('id', ParseIntPipe) id:number):Promise<ArtistsEntity>{
         return this.artistService.updateArtistSold(id)
+    }
+
+    @Post('/upload')
+    @UseInterceptors(FileInterceptor('file'))
+    uploadImage(@UploadedFile() file){
+        console.log(file); 
     }
 
 }
